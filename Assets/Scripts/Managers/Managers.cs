@@ -17,7 +17,7 @@ public class Managers : MonoBehaviour
 
     public static InputManager Input { get { return instance._input; } }
     public static ResourceManager Resource { get { return instance._resource; } }
-    public static UIManager UI { get { return instance. _ui; } }
+    public static UIManager UI { get { return instance._ui; } }
     void Start()
     {
         Init();
