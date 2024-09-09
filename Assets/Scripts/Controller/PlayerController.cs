@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
         Managers.Input.MouseAction -= OnMouseClicked;
         Managers.Input.MouseAction += OnMouseClicked;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             Managers.UI.ClosePopupUI(uiPopup);
         }
@@ -66,16 +66,18 @@ public class PlayerController : MonoBehaviour
     {
         if (_moveToDest)
         {
-            Vector3 dir = _destPos - transform.position;//规氢
-            if (dir.magnitude < 0.0001f)//芭府 distance
+            //规氢
+            Vector3 dir = _destPos - transform.position;
+
+            //芭府 distance
+            if (dir.magnitude < 0.0001f)
             {
                 _moveToDest = false;
             }
             else
             {
+                _state = PlayerState.Moving;
                 float moveDist = Mathf.Clamp(_speed * Time.deltaTime, 0, dir.magnitude);
-
-
                 transform.position += dir.normalized * moveDist;
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 20 * Time.deltaTime);
             }
@@ -85,6 +87,7 @@ public class PlayerController : MonoBehaviour
     void UpdateIdle()
     {
         anim.SetFloat("speed", 0);
+        _state = PlayerState.Idle;
     }
     //if (_moveToDest)
     //{
