@@ -31,7 +31,7 @@ public class UIManager
             name = typeof(T).Name;
         }
         GameObject go = Managers.Resources.Instantiate($"UI/Popup/{name}");//팝업 생성
-        T popup = Util.GetOrAddComponent<T>(go);//컴퍼넌트가 붙어있지 않다면 추가
+        T popup = Util.GetorAddComponent<T>(go);//컴퍼넌트가 붙어있지 않다면 추가
         _popupStack.Push(popup);
 
         //프로퍼티로 생성 해줌
@@ -53,11 +53,32 @@ public class UIManager
             name = typeof(T).Name;
         }
         GameObject go = Managers.Resources.Instantiate($"UI/Scene/{name}");//팝업 생성
-        T sceneUI = Util.GetOrAddComponent<T>(go);//컴퍼넌트가 붙어있지 않다면 추가
+        T sceneUI = Util.GetorAddComponent<T>(go);//컴퍼넌트가 붙어있지 않다면 추가
         _sceneUI = sceneUI;
         go.transform.SetParent(Root.transform);
 
         return sceneUI;
+    }
+    public void SetCanvas(GameObject go, bool sort = true)
+    {
+        //캔바스 추출
+        Canvas canvas = Util.GetorAddComponent<Canvas>(go);
+        //랜더모드는 무조건 ScreenSpaceOverlay(이경우만 소팅되기 때문이)
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        //캔버스 안에 캔버스가 중첩해서 있을 때 그 부모가 어떤 값을 가지던 자신은 무조건 내 소팅 오더를 가질꺼야
+        //overrideSorting을 통해 혹시라도 중첩캔버스라 자식 캔버스가 있더라도 부모 캔버스가 어떤 값을 가지던
+        //나는 내 오더 값을 가지려 할때 true
+        canvas.overrideSorting = true;
+        if (sort)
+        {
+            canvas.sortingOrder = _order;
+            _order++;
+
+        }
+        else//팝업이랑 상관없는 일반 UI
+        {
+            canvas.sortingOrder = 0;
+        }
     }
 
     public void ClosePopupUI()
@@ -89,26 +110,7 @@ public class UIManager
             ClosePopupUI();
     }
 
-    public void SetCanvas(GameObject go, bool sort = true)
-    {
-        //캔바스 추출
-        Canvas canvas = Util.GetOrAddComponent<Canvas>(go);
-        //랜더모드는 무조건 ScreenSpaceOverlay(이경우만 소팅되기 때문이)
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        //캔버스 안에 캔버스가 중첩해서 있을 때 그 부모가 어떤 값을 가지던 자신은 무조건 내 소팅 오더를 가질꺼야
-        //overrideSorting을 통해 혹시라도 중첩캔버스라 자식 캔버스가 있더라도 부모 캔버스가 어떤 값을 가지던
-        //나는 내 오더 값을 가지려 할때 true
-        canvas.overrideSorting = true;
-        if (sort)
-        {
-            canvas.sortingOrder = _order;
-            _order++;
 
-        }else//팝업이랑 상관없는 일반 UI
-        {
-            canvas.sortingOrder = 0;
-        }
-    }
 
     public T MakeSubItem<T>(Transform parent = null, string name = null) where T : UI_Base
     {
@@ -118,6 +120,6 @@ public class UIManager
         GameObject go = Managers.Resources.Instantiate($"UI/SubItem/{name}");
         if (parent != null)
             go.transform.SetParent(parent);
-        return Util.GetOrAddComponent<T>(go);
+        return Util.GetorAddComponent<T>(go);
     }
 }

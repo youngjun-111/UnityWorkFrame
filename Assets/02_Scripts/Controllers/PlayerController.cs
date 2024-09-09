@@ -25,14 +25,15 @@ public class PlayerController : MonoBehaviour
         //{
         //    Managers.UI.ClosePopupUI(uiPopup);
         //}
-        for (int i = 0; i < 5; i++)
-        {
-            Managers.UI.ShowPopupUI<UI_Button>();
-        }
+        //for (int i = 0; i < 5; i++)
+        //{
+        //    Managers.UI.ShowPopupUI<UI_Button>();
+        //}
         //uiPopup = Managers.UI.ShowPopupUI<UI_Button>();
-        //Managers.UI.ShowSceneUI<UI_Inven>();
+        Managers.UI.ShowSceneUI<UI_Inven>();
         //프리팹 폴더를 만들어서 UI_Button을 생성시킨다.
-        Managers.Resources.Instantiate("UI/UI_Button");
+        //Managers.Resources.Instantiate("UI/UI_Button");
+        //Managers.Resources.Instantiate("UI/UI_Inven");
     }
     public enum PlayerState
     {

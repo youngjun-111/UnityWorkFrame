@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 1716705763309104147}
   - component: {fileID: 4419367004938621697}
   - component: {fileID: 3239968961573787961}
-  - component: {fileID: 4253883828598936870}
+  - component: {fileID: -757247724137893809}
   m_Layer: 5
   m_Name: UI_Button
   m_TagString: Untagged
@@ -336,7 +336,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4253883828598936870
+--- !u!114 &-757247724137893809
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -15,7 +15,7 @@ public class ResourceManager
     {
         GameObject prefab = Load<GameObject>($"Prefabs/ {path}");//경로만 지정해주면 범용적으로 사용가능함
 
-        if(prefab == null)
+        if (prefab == null)
         {
             Debug.Log($"Failed to load prefab : {path}");
             return null;
@@ -28,7 +28,7 @@ public class ResourceManager
             go.name = go.name.Substring(0, index);
         }
         //Object를 붙이지 않으면 재귀하려고 할거라서
-        return Object.Instantiate(prefab, parent);
+        return go;
     }
 
     //랩핑해본것일 뿐 실제로는 필요없다.
