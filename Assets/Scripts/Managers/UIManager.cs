@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class UIManager 
 {
-    int _order = 10;//혹시 모르니깐 여유를 두고 먼져 생성할게 있다면 10보다 작은 수로 팝업할 수 있게 함.
+    int _order = 10;//혹시 모르니깐 여유를 두고 먼저 생성할게 있다면 10보다 작은 수로 팝업할 수 있게 함.
     //가장 마지막에 듸운 팝업이 가장 먼저 사라져야하기 때문에
+    //Stack맨 마지막에 들어간게 나오는 것 쌓이고 쌓이는것
     Stack<UI_Popup> _popupStack = new Stack<UI_Popup>();
     UI_Scene _sceneUI = null;
 
@@ -14,10 +15,7 @@ public class UIManager
         {
             GameObject root = GameObject.Find("@UI_Root");
             if (root == null)
-            {
                 root = new GameObject { name = "@UI_Root" };
-            }
-
             return root;
         }
     }
@@ -31,6 +29,8 @@ public class UIManager
         GameObject go = Managers.Resource.Instantiate($"UI/Popup/{name}");//팝업 생성
         T popup = Util.GetOrAddComponent<T>(go);//컴퍼넌트가 붙어있지 않다면 추가
         _popupStack.Push(popup);
+
+        //프로퍼티로 생성 해줌
         //GameObject root = GameObject.Find("@UI_Root");
         //if(root == null)
         //{
@@ -74,6 +74,7 @@ public class UIManager
         if (_popupStack.Count == 0)
             return;
 
+        //맨 위에서 개체를 제거하지 않고 반환 (꺼내지 않고 엿본다고 생각)
         if (_popupStack.Peek() != popup)
         {
             Debug.Log("Close Popup Failed!");

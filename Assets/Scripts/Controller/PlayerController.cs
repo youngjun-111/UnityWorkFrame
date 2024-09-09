@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -20,15 +22,16 @@ public class PlayerController : MonoBehaviour
         Managers.Input.MouseAction -= OnMouseClicked;
         Managers.Input.MouseAction += OnMouseClicked;
 
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            Managers.UI.ClosePopupUI(uiPopup);
-        }
-        for (int i = 0; i < 5; i++)
-        {
-            Managers.UI.ShowPopupUI<UI_Button>();
-        }
-        uiPopup = Managers.UI.ShowPopupUI<UI_Button>();
+        //if (Input.GetKeyDown(KeyCode.Tab))
+        //{
+        //    Managers.UI.ClosePopupUI(uiPopup);
+        //}
+        //for (int i = 0; i < 5; i++)
+        //{
+        //    Managers.UI.ShowPopupUI<UI_Button>();
+        //}
+        //uiPopup = Managers.UI.ShowPopupUI<UI_Button>();
+        Managers.UI.ShowSceneUI<UI_Inven>();
         //프리팹 폴더를 만들어서 UI_Button을 생성시킨다.
         //Managers.Resource.Instantiate("UI/UI_Button");
     }
@@ -76,7 +79,6 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                _state = PlayerState.Moving;
                 float moveDist = Mathf.Clamp(_speed * Time.deltaTime, 0, dir.magnitude);
                 transform.position += dir.normalized * moveDist;
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 20 * Time.deltaTime);
@@ -87,7 +89,6 @@ public class PlayerController : MonoBehaviour
     void UpdateIdle()
     {
         anim.SetFloat("speed", 0);
-        _state = PlayerState.Idle;
     }
     //if (_moveToDest)
     //{
@@ -182,5 +183,6 @@ public class PlayerController : MonoBehaviour
             _state = PlayerState.Moving;
             _moveToDest = true; //클릭 방식으로 이동 가능 하게.
         }
+        _state = PlayerState.Moving;
     }
 }

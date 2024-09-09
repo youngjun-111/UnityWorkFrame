@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-public class UI_Base : MonoBehaviour
+public abstract class UI_Base : MonoBehaviour
 {
     //상속 받는애만 쓰게하기 위해 protected로 만들어줌
     protected Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, UnityEngine.Object[]>();
+
+    public abstract void Init();
 
     //컴포넌트에 연결해줄 함수 형태를 만들자.
     protected void Bind<T>(Type type) where T : UnityEngine.Object
