@@ -20,7 +20,13 @@ public class ResourceManager
             Debug.Log($"Failed to load prefab : {path}");
             return null;
         }
-
+        GameObject go = Object.Instantiate(prefab, parent);
+        //"(Clone)"문자열을 찾아서 인덱스를 반환
+        int index = go.name.IndexOf("(Clone)");
+        if(index > 0)
+        {
+            go.name = go.name.Substring(0, index);
+        }
         //Object를 붙이지 않으면 재귀하려고 할거라서
         return Object.Instantiate(prefab, parent);
     }
@@ -28,8 +34,8 @@ public class ResourceManager
     //랩핑해본것일 뿐 실제로는 필요없다.
     public void Destroy(GameObject go)
     {
-        if(go == null)
+        if (go == null)
             return;
-            Object.Destroy(go);
+        Object.Destroy(go);
     }
 }

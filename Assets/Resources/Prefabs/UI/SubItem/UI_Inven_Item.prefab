@@ -165,6 +165,7 @@ GameObject:
   - component: {fileID: 4581432195111866193}
   - component: {fileID: 6813778264856275038}
   - component: {fileID: 334507745453210119}
+  - component: {fileID: 2085865896195375560}
   m_Layer: 5
   m_Name: UI_Inven_Item
   m_TagString: Untagged
@@ -231,3 +232,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2085865896195375560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2325208139237833527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba27a921b8053814c8c47c673d7d6b2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

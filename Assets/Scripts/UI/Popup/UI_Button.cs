@@ -53,12 +53,12 @@ public class UI_Button : UI_Popup
 
         //이거는 클릭 시 적용될 함수
         //즉, 버튼 누를 때
-        GetButton((int)Buttons.PointButton).gameObject.AddUIEvent(OnButtonClicked);
+        GetButton((int)Buttons.PointButton).gameObject.BindUIEvent(OnButtonClicked);
 
         //이거는 드래그 하여 이미지를 옮길려고 하는 함수
         //즉, 이미지 클릭하여 옮길 때
         GameObject go = GetImage((int)Images.Image).gameObject;
-        AddUIEvent(go, (PointerEventData data) => { go.transform.position = data.position; }, Define.UIEvent.Drag);
+        BindUIEvent(go, (PointerEventData data) => { go.transform.position = data.position; }, Define.UIEvent.Drag);
     }
     public void OnButtonClicked(PointerEventData data)
     {
@@ -67,7 +67,6 @@ public class UI_Button : UI_Popup
     }
 
     //UI_Base에 옮겨진것들임 상속해줬음
-
     //오브젝트는 컴포넌트가 아니기에 따로 만들어준 함수
     //test일뿐 굳이 사용하지 않는다 UI에서 특히하게 GameObject를 사용하는 일이 있을경우 쓸것이다.
     //public static GameObject FindChild(GameObject go, string name = null, bool recursive = false)

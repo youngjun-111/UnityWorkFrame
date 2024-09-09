@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
 public abstract class UI_Base : MonoBehaviour
 {
     //상속 받는애만 쓰게하기 위해 protected로 만들어줌
@@ -39,6 +40,7 @@ public abstract class UI_Base : MonoBehaviour
             }
         }
     }
+
     protected T Get<T>(int idx) where T : UnityEngine.Object
     {
         UnityEngine.Object[] objects = null;
@@ -54,14 +56,16 @@ public abstract class UI_Base : MonoBehaviour
     protected Button GetButton(int idx) { return Get<Button>(idx); }
     protected Image GetImage(int idx) { return Get<Image>(idx); }
 
+    protected GameObject GetObject(int idx) { return Get<GameObject>(idx); }
+
     //이런 형태이면 될듯 지금은 OnDragHandler 이것이지만 다른것도 사용하게 될테니까 이넘 타입으로 만들어 둠
     //go : Action이 들어가 있는 스크립트가 있는 게임 오브젝트...
     //action : 구독을 시킬 액션
     //mode(하고싶은)
-    public static void AddUIEvent(GameObject go, Action<PointerEventData> action, Define.UIEvent type = Define.UIEvent.Click)
+    public static void BindUIEvent(GameObject go, Action<PointerEventData> action, Define.UIEvent type = Define.UIEvent.Click)
     {
         UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
-        evt.OnDragHandler += ((PointerEventData data) => { go.transform.position = data.position; });
+        evt.OnDragHandler += ((PointerEventData data) => { evt.transform.position = data.position; });
 
         switch (type)
         {

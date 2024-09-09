@@ -17,22 +17,26 @@ public class InputManager
 
     public void OnUpdate()
     {
-        if (!EventSystem.current.IsPointerOverGameObject())
+        if (EventSystem.current.IsPointerOverGameObject())
             return;
-            if (Input.anyKey && KeyAction != null)
+
+        if (Input.anyKey && KeyAction != null)
             KeyAction.Invoke();
 
         if(MouseAction != null)
         {
             //프레스일 경우
-            if(Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0))
             {
                 MouseAction.Invoke(Define.MouseEvent.Press);
                 _pressed = true;
-            }else //클릭일 경우 (만약에 한번이라도 프레스를 했으면 click 이라는 이벤트 발생)
+            }
+            else //클릭일 경우 (만약에 한번이라도 프레스를 했으면 click 이라는 이벤트 발생)
             {
                 if (_pressed)
+                { 
                     MouseAction.Invoke(Define.MouseEvent.Click);
+                }
                 _pressed = false;
             }
         }

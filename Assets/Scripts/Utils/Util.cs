@@ -12,11 +12,11 @@ public class Util
     {
                             // T FindChild<T>
         Transform transform = FindChild<Transform>(go, name, recursive);
-        if (transform == null)
+        if (transform != null)
         {
-            return null;
+            return transform.gameObject;
         }
-        return transform.gameObject;
+        return null;
     }
 
     // 최상위 부모, 이름은 비교하지 않고 그 타입에만 해당하면 리턴 ( 컴퍼넌트 이름 ),
@@ -24,6 +24,7 @@ public class Util
     public static T FindChild<T>(GameObject go, string name = null, bool recursive = false)
     where T : UnityEngine.Object
     {
+        //최상위 객체가 null일 경우
         if (go == null)
             return null;
 
@@ -49,7 +50,9 @@ public class Util
             foreach (T component in go.GetComponentsInChildren<T>())
             {   // 이름이 비어있거나 내가 찾으려는 이름과 같다면
                 if (string.IsNullOrEmpty(name) || component.name == name)
-                    return component;
+                {
+                    return component; 
+                }
             }
         }
         return null;

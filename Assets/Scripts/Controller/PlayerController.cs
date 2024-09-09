@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         Managers.Input.MouseAction -= OnMouseClicked;
         Managers.Input.MouseAction += OnMouseClicked;
-
+        Managers mg = Managers.Instance;
         //if (Input.GetKeyDown(KeyCode.Tab))
         //{
         //    Managers.UI.ClosePopupUI(uiPopup);
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         //{
         //    Managers.UI.ShowPopupUI<UI_Button>();
         //}
-        //uiPopup = Managers.UI.ShowPopupUI<UI_Button>();
+        uiPopup = Managers.UI.ShowPopupUI<UI_Button>();
         Managers.UI.ShowSceneUI<UI_Inven>();
         //프리팹 폴더를 만들어서 UI_Button을 생성시킨다.
         //Managers.Resource.Instantiate("UI/UI_Button");
@@ -73,8 +73,9 @@ public class PlayerController : MonoBehaviour
             Vector3 dir = _destPos - transform.position;
 
             //거리 distance
-            if (dir.magnitude < 0.0001f)
+            if (dir.magnitude < 0.00001f)
             {
+                _state = PlayerState.Idle;
                 _moveToDest = false;
             }
             else
@@ -183,6 +184,5 @@ public class PlayerController : MonoBehaviour
             _state = PlayerState.Moving;
             _moveToDest = true; //클릭 방식으로 이동 가능 하게.
         }
-        _state = PlayerState.Moving;
     }
 }

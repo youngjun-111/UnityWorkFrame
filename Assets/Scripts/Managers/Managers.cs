@@ -8,16 +8,16 @@ public class Managers : MonoBehaviour
     //매니저를 관리하는 매니저
     //싱글톤을 은닉하고 프로퍼티로하여 사용 하기 위해 private로 만들어줌
     static Managers s_instance;//유일성이 보장된다.
-    public static Managers instance { get { Init(); return s_instance; } }//읽기 전용 값만 불러옴
+    public static Managers Instance { get { Init(); return s_instance; } }//읽기 전용 값만 불러옴
     //이제 매니저스는 자신이 뭔가를 직접하기 보단 다른 매니저들을 관리(싱글톤을 사용하게)해주는 치프매니저라고 생각하면 된다.
     //그래서 직접 외부에서 직급 할필요가 없어서 private으로 만들었음.
     InputManager _input = new InputManager();
     ResourceManager _resource = new ResourceManager();
     UIManager _ui = new UIManager();
 
-    public static InputManager Input { get { return instance._input; } }
-    public static ResourceManager Resource { get { return instance._resource; } }
-    public static UIManager UI { get { return instance._ui; } }
+    public static InputManager Input { get { return Instance._input; } }
+    public static ResourceManager Resources { get { return Instance._resource; } }
+    public static UIManager UI { get { return Instance._ui; } }
     void Start()
     {
         Init();
