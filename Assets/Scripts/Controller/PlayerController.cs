@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     bool _moveToDest = false;
     Vector3 _destPos;
 
-    UI_Button uiPopup;
+    //UI_Button uiPopup;
     //float wait_run_ratio = 0;
     Animator anim;
     void Start()
@@ -21,19 +21,18 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         Managers.Input.MouseAction -= OnMouseClicked;
         Managers.Input.MouseAction += OnMouseClicked;
-        Managers mg = Managers.Instance;
         //if (Input.GetKeyDown(KeyCode.Tab))
         //{
         //    Managers.UI.ClosePopupUI(uiPopup);
         //}
-        //for (int i = 0; i < 5; i++)
-        //{
-        //    Managers.UI.ShowPopupUI<UI_Button>();
-        //}
-        uiPopup = Managers.UI.ShowPopupUI<UI_Button>();
-        Managers.UI.ShowSceneUI<UI_Inven>();
+        for (int i = 0; i < 5; i++)
+        {
+            Managers.UI.ShowPopupUI<UI_Button>();
+        }
+        //uiPopup = Managers.UI.ShowPopupUI<UI_Button>();
+        //Managers.UI.ShowSceneUI<UI_Inven>();
         //프리팹 폴더를 만들어서 UI_Button을 생성시킨다.
-        //Managers.Resource.Instantiate("UI/UI_Button");
+        Managers.Resources.Instantiate("UI/UI_Button");
     }
     public enum PlayerState
     {

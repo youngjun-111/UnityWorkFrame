@@ -12,11 +12,11 @@ public class Util
     {
                             // T FindChild<T>
         Transform transform = FindChild<Transform>(go, name, recursive);
-        if (transform != null)
+        if (transform == null)
         {
-            return transform.gameObject;
+            return null;
         }
-        return null;
+        return transform.gameObject;
     }
 
     // 최상위 부모, 이름은 비교하지 않고 그 타입에만 해당하면 리턴 ( 컴퍼넌트 이름 ),
@@ -63,15 +63,9 @@ public class Util
     //즉, 타입이 컴포넌트라면
     public static T GetOrAddComponent<T>(GameObject go) where T : UnityEngine.Component
     {
-        //그 물체의 컴포넌트를 가져오고
         T component = go.GetComponent<T>();
-        //근데 지정해준 컴포넌트가 없으면
         if (component == null)
-        {
-            //그 컴포넌트를 붙여줌
             component = go.AddComponent<T>();
-        }
-        //아니면 그냥 컴포넌트를 반환
         return component;
     }
 }

@@ -16,28 +16,19 @@ public abstract class UI_Base : MonoBehaviour
     protected void Bind<T>(Type type) where T : UnityEngine.Object
     {
         string[] names = Enum.GetNames(type);
-
         UnityEngine.Object[] objects = new UnityEngine.Object[names.Length];
-        _objects.Add(typeof(T), objects);
+        _objects.Add(typeof(T), objects); // Dictionary 에 추가
 
+        // T 에 속하는 오브젝트들을 Dictionary의 Value인 objects 배열의 원소들에 하나하나 추가
         for (int i = 0; i < names.Length; i++)
         {
-            //오브젝트를 찾을때
-            //아래 Util에서 만든 함수를 이용해 처리
             if (typeof(T) == typeof(GameObject))
-            {
                 objects[i] = Util.FindChild(gameObject, names[i], true);
-            }
-            //컴포넌트를 찾을때
             else
-            {
                 objects[i] = Util.FindChild<T>(gameObject, names[i], true);
-            }
-            //잘찾아주고 있는지 체크
+
             if (objects[i] == null)
-            {
                 Debug.Log($"Failed to bind({names[i]})");
-            }
         }
     }
 

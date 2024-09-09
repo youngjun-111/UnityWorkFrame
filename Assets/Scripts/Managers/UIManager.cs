@@ -15,7 +15,9 @@ public class UIManager
         {
             GameObject root = GameObject.Find("@UI_Root");
             if (root == null)
+            {
                 root = new GameObject { name = "@UI_Root" };
+            }
             return root;
         }
     }
@@ -47,7 +49,9 @@ public class UIManager
     {
         //T눈 아무 T나 받는게 아니라 무조건 UI팝업을 상속받는 애로 만들자
         if (string.IsNullOrEmpty(name))
+        {
             name = typeof(T).Name;
+        }
         GameObject go = Managers.Resources.Instantiate($"UI/Scene/{name}");//팝업 생성
         T sceneUI = Util.GetOrAddComponent<T>(go);//컴퍼넌트가 붙어있지 않다면 추가
         _sceneUI = sceneUI;
