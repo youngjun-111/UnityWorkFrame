@@ -32,8 +32,8 @@ public class UI_Inven : UI_Scene
 
             //GameObject item = Managers.UI.MakeSubItem<UI_Inven_Item>()
 
-            //Util.GetorAddComponent<UI_Inven_Item>(item);
-            UI_Inven_Item invenItem = item.GetorAddComponent<UI_Inven_Item>();
+            //Util.GetOrAddComponent<UI_Inven_Item>(item);
+            UI_Inven_Item invenItem = item.GetOrAddComponent<UI_Inven_Item>();
             invenItem.SetInfo($"테스트{i}번");
         }
     }

@@ -13,7 +13,7 @@ public class ResourceManager
 
     public GameObject Instantiate(string path, Transform parent = null)
     {
-        GameObject prefab = Load<GameObject>($"Prefabs/ {path}");//경로만 지정해주면 범용적으로 사용가능함
+        GameObject prefab = Load<GameObject>($"Prefabs/{path}");//경로만 지정해주면 범용적으로 사용가능함
 
         if (prefab == null)
         {

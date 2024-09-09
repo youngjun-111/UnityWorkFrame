@@ -61,7 +61,7 @@ public class Util
     // 게임오브젝트(go)에 해당 컴포넌트가 없으면 T 컴포넌트 추가
     //프리팹을 넣을 필요가 없어지고 컴포넌트를 일일이 붙여줄 필요가 없어진다.
     //즉, 타입이 컴포넌트라면
-    public static T GetorAddComponent<T>(GameObject go) where T : UnityEngine.Component
+    public static T GetOrAddComponent<T>(GameObject go) where T : UnityEngine.Component
     {
         T component = go.GetComponent<T>();
         if (component == null)

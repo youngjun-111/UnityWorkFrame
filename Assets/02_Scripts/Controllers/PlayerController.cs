@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
         //}
         //for (int i = 0; i < 5; i++)
         //{
-        //    Managers.UI.ShowPopupUI<UI_Button>();
+        //    uiPopup = Managers.UI.ShowPopupUI<UI_Button>();
         //}
         //uiPopup = Managers.UI.ShowPopupUI<UI_Button>();
         Managers.UI.ShowSceneUI<UI_Inven>();
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
     //    anim.SetFloat("wait_run_ratio", wait_run_ratio);
     //    anim.Play("WAIT");
     //}
-
+    #region 키보드 움직임
     void OnKeyboard()
     {
         //좌,우, 전,후 이동
@@ -161,14 +161,16 @@ public class PlayerController : MonoBehaviour
 
         _moveToDest = false;//클릭 방식으로 이동 불가
     }
+    #endregion
 
 
+#region 마우스 움직임
     void OnMouseClicked(Define.MouseEvent evt)
     {
         //Press일경우는 작동 안되게끔(그냥 임시로 처리할 수 있게..)
         //프레스 기능을 사용하고 싶다면 삭제
-        if (evt != Define.MouseEvent.Click)
-            return;
+        //if (evt != Define.MouseEvent.Click)
+        //    return;
         if (_state == PlayerState.Die)
             return;
 
@@ -185,4 +187,5 @@ public class PlayerController : MonoBehaviour
             _moveToDest = true; //클릭 방식으로 이동 가능 하게.
         }
     }
+    #endregion
 }
