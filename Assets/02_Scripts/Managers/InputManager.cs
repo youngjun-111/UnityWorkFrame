@@ -26,7 +26,7 @@ public class InputManager
         if(MouseAction != null)
         {
             //프레스일 경우
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(1))
             {
                 MouseAction.Invoke(Define.MouseEvent.Press);
                 _pressed = true;
