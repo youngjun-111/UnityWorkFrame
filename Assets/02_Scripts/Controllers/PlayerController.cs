@@ -9,33 +9,36 @@ public class PlayerController : MonoBehaviour
 
     //마우스 방식으로 이동 하기위한 불 변수
     bool _moveToDest = false;
+
     Vector3 _destPos;
 
-    //UI_Button uiPopup;
+    UI_Button uiPopup;
     //float wait_run_ratio = 0;
     Animator anim;
     void Start()
     {
         anim = GetComponent<Animator>();
         //키보드 이동 인풋 구독
-        //Managers.Input.KeyAction -= OnKeyboard;
-        //Managers.Input.KeyAction += OnKeyboard;
+        Managers.Input.KeyAction -= OnKeyboard;
+        Managers.Input.KeyAction += OnKeyboard;
         //마우스 이동 인풋 구독
-        Managers.Input.MouseAction -= OnMouseClicked;
-        Managers.Input.MouseAction += OnMouseClicked;
-        //if (Input.GetKeyDown(KeyCode.Tab))
-        //{
-        //    Managers.UI.ClosePopupUI(uiPopup);
-        //}
-        //for (int i = 0; i < 5; i++)
-        //{
-        //    uiPopup = Managers.UI.ShowPopupUI<UI_Button>();
-        //}
-        //uiPopup = Managers.UI.ShowPopupUI<UI_Button>();
-        //Managers.UI.ShowSceneUI<UI_Inven>();
+        //Managers.Input.MouseAction -= OnMouseClicked;
+        //Managers.Input.MouseAction += OnMouseClicked;
+
+        //시험 용으로 써본것들 UI는 제대로 나옴
+        for (int i = 0; i < 5; i++)
+        {
+            uiPopup = Managers.UI.ShowPopupUI<UI_Button>();
+        }
+        uiPopup = Managers.UI.ShowPopupUI<UI_Button>();
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            Managers.UI.CloseAllPopupUI();
+        }
+        Managers.UI.ShowSceneUI<UI_Inven>();
         //프리팹 폴더를 만들어서 UI_Button을 생성시킨다.
-        //Managers.Resources.Instantiate("UI/UI_Button");
-        //Managers.Resources.Instantiate("UI/UI_Inven");
+        Managers.Resources.Instantiate("UI/UI_Button");
+        Managers.Resources.Instantiate("UI/UI_Inven");
     }
     public enum PlayerState
     {
@@ -44,6 +47,7 @@ public class PlayerController : MonoBehaviour
         Idle,
     }
 
+    //초기 상태는 무조건 idle
     PlayerState _state = PlayerState.Idle;
 
     void Update()
@@ -60,6 +64,20 @@ public class PlayerController : MonoBehaviour
                 UpdateIdle();
                 break;
         }
+        //키보드 방식이긴 하지만 키입력값을 1과 0으로 줘서 애니메이션을 재생 하려고 할때 쓰인 코드
+        //현재는 파라미터를 이용하여 재생하며 _state를 사용하여 상태를 구분지어 줘야하기때문에 필요 없어짐
+        //if (_moveToDest)
+        //{
+        //    wait_run_ratio = Mathf.Lerp(wait_run_ratio, 1, 10f * Time.deltaTime);
+        //    anim.SetFloat("wait_run_ratio", wait_run_ratio);
+        //    anim.Play("RUN");
+        //}
+        //else
+        //{
+        //    wait_run_ratio = Mathf.Lerp(wait_run_ratio, 0, 10f * Time.deltaTime);
+        //    anim.SetFloat("wait_run_ratio", wait_run_ratio);
+        //    anim.Play("WAIT");
+        //}
     }
 
     void UpdateDie()
@@ -93,38 +111,26 @@ public class PlayerController : MonoBehaviour
     {
         anim.SetFloat("speed", 0);
     }
-    //if (_moveToDest)
-    //{
-    //    wait_run_ratio = Mathf.Lerp(wait_run_ratio, 1, 10f * Time.deltaTime);
-    //    Animator anim = GetComponent<Animator>();
-    //    anim.SetFloat("wait_run_ratio", wait_run_ratio);
-    //    anim.Play("RUN");
-    //}
-    //else
-    //{
-    //    wait_run_ratio = Mathf.Lerp(wait_run_ratio, 0, 10f * Time.deltaTime);
-    //    Animator anim = GetComponent<Animator>();
-    //    anim.SetFloat("wait_run_ratio", wait_run_ratio);
-    //    anim.Play("WAIT");
-    //}
+    
     #region 키보드 움직임
     void OnKeyboard()
     {
         //좌,우, 전,후 이동
+        //전진
         if (Input.GetKey(KeyCode.W))
         {
             //transform.rotation = Quaternion.LookRotation(Vector3.left);
             // == 보간
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward), 0.2f);
 
-            //방향을 정해줬으니 앞으로만 가게했는데..
+             //방향을 정해줬으니 앞으로만 가게했는데..
             //transform.Translate(Vector3.forward * Time.deltaTime * _speed);
 
             //트렌스레이트(로컬좌표)라서 포지션으로 바꿔줌
             //transform.Translate(Vector3.forward * Time.deltaTime * _speed);
             transform.position += Vector3.forward * Time.deltaTime * _speed;
         }
-
+        //후진
         if (Input.GetKey(KeyCode.S))
         {
             //transform.rotation = Quaternion.LookRotation(Vector3.left);
@@ -136,7 +142,7 @@ public class PlayerController : MonoBehaviour
             //트렌스 레이트(로컬좌표)를 포지션으로 바꿔줌
             transform.position += Vector3.back * Time.deltaTime * _speed;
         }
-
+        //좌
         if (Input.GetKey(KeyCode.A))
         {
             //transform.rotation = Quaternion.LookRotation(Vector3.left);
@@ -148,7 +154,7 @@ public class PlayerController : MonoBehaviour
             //트렌스 레이트(로컬좌표)를 포지션으로 바꿔줌
             transform.position += Vector3.left * Time.deltaTime * _speed;
         }
-
+        //우
         if (Input.GetKey(KeyCode.D))
         {
             //transform.rotation = Quaternion.LookRotation(Vector3.right);
@@ -160,11 +166,15 @@ public class PlayerController : MonoBehaviour
             //트렌스 레이트(로컬좌표)를 포지션으로 바꿔줌
             transform.position += Vector3.right * Time.deltaTime * _speed;
         }
-
         _moveToDest = false;//클릭 방식으로 이동 불가
+        anim.SetFloat("speed", _speed);
+
+        if (Input.GetKeyUp(KeyCode.None))
+        {
+            _state = PlayerState.Idle;
+        }
     }
     #endregion
-
 
 #region 마우스 움직임
     void OnMouseClicked(Define.MouseEvent evt)

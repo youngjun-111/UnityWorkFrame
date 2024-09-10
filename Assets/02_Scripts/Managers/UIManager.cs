@@ -110,8 +110,6 @@ public class UIManager
             ClosePopupUI();
     }
 
-
-
     public T MakeSubItem<T>(Transform parent = null, string name = null) where T : UI_Base
     {
         if (string.IsNullOrEmpty(name))
