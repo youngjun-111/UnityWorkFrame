@@ -26,19 +26,20 @@ public class PlayerController : MonoBehaviour
         //Managers.Input.MouseAction += OnMouseClicked;
 
         //시험 용으로 써본것들 UI는 제대로 나옴
-        for (int i = 0; i < 5; i++)
-        {
-            uiPopup = Managers.UI.ShowPopupUI<UI_Button>();
-        }
-        uiPopup = Managers.UI.ShowPopupUI<UI_Button>();
-        if (Input.GetKeyDown(KeyCode.LeftAlt))
-        {
-            Managers.UI.CloseAllPopupUI();
-        }
-        Managers.UI.ShowSceneUI<UI_Inven>();
+        //for (int i = 0; i < 5; i++)
+        //{
+        //    uiPopup = Managers.UI.ShowPopupUI<UI_Button>();
+        //}
+
+        //uiPopup = Managers.UI.ShowPopupUI<UI_Button>();
+        //if (Input.GetKeyDown(KeyCode.LeftAlt))
+        //{
+        //    Managers.UI.CloseAllPopupUI();
+        //}
+        //Managers.UI.ShowSceneUI<UI_Inven>();
         //프리팹 폴더를 만들어서 UI_Button을 생성시킨다.
-        Managers.Resources.Instantiate("UI/UI_Button");
-        Managers.Resources.Instantiate("UI/UI_Inven");
+        //Managers.Resources.Instantiate("UI/UI_Button");
+        //Managers.Resources.Instantiate("UI/UI_Inven");
     }
     public enum PlayerState
     {
