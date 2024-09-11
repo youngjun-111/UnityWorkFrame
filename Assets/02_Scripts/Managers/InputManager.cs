@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using System;
 
 public class InputManager
 {
@@ -23,7 +21,7 @@ public class InputManager
         if (Input.anyKey && KeyAction != null)
             KeyAction.Invoke();
 
-        if(MouseAction != null)
+        if (MouseAction != null)
         {
             //프레스일 경우
             if (Input.GetMouseButton(1))
@@ -34,7 +32,7 @@ public class InputManager
             else //클릭일 경우 (만약에 한번이라도 프레스를 했으면 click 이라는 이벤트 발생)
             {
                 if (_pressed)
-                { 
+                {
                     MouseAction.Invoke(Define.MouseEvent.Click);
                 }
                 _pressed = false;
@@ -53,5 +51,10 @@ public class InputManager
         //하나의 Form을 다른 thread에서 접근하게 될 경우에 기존의 Form과 충돌이 날 수 있다.
         //이 때 invoke를 사용하여 실행하려고 하는 메소드의 대리자(delegate)를 실행시키면 된다.
 
+    }
+    public void Clear()
+    {
+        KeyAction = null;
+        MouseAction = null;
     }
 }

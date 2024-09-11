@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class LoginScene : BaseScene
 {
-
     protected override void Init()
     {
         base.Init();
@@ -14,7 +13,7 @@ public class LoginScene : BaseScene
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             //그냥 씬을 로드하던걸
             //SceneManager.LoadScene("Game");

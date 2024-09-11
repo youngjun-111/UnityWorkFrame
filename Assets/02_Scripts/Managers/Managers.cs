@@ -56,6 +56,17 @@ public class Managers : MonoBehaviour
             //s_instance라는 프로퍼티를 사용하기 위해 빈게임오브젝트를 만들어주고 스크립트를 추가해준 이 오브젝트의
             //Managers컴포넌트를 가져와줌
             s_instance = go.GetComponent<Managers>();
+            //사운드오브젝트를 생성시켜주는것을 실행 시켜줌
+            s_instance._sound.Init();
         }
+    }
+
+    //씬을 이동할 때 끄냥 Clear()를 호출하면 되지만 다른것도 클리어 해줄게 있으니 함수로 만들어줌
+    public static void Clear()
+    {
+        Sound.Clear();
+        Input.Clear();
+        Scene.Clear();
+        UI.Clear();
     }
 }

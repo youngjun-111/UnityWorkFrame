@@ -59,6 +59,7 @@ public class UIManager
 
         return sceneUI;
     }
+
     public void SetCanvas(GameObject go, bool sort = true)
     {
         //Äµ¹Ù½º ÃßÃâ
@@ -119,5 +120,11 @@ public class UIManager
         if (parent != null)
             go.transform.SetParent(parent);
         return Util.GetOrAddComponent<T>(go);
+    }
+
+    public void Clear()
+    {
+        CloseAllPopupUI();
+        _sceneUI = null;
     }
 }

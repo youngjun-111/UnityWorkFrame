@@ -19,11 +19,11 @@ public class PlayerController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         //키보드 이동 인풋 구독
-        Managers.Input.KeyAction -= OnKeyboard;
-        Managers.Input.KeyAction += OnKeyboard;
+        //Managers.Input.KeyAction -= OnKeyboard;
+        //Managers.Input.KeyAction += OnKeyboard;
         //마우스 이동 인풋 구독
-        //Managers.Input.MouseAction -= OnMouseClicked;
-        //Managers.Input.MouseAction += OnMouseClicked;
+        Managers.Input.MouseAction -= OnMouseClicked;
+        Managers.Input.MouseAction += OnMouseClicked;
 
         //시험 용으로 써본것들 UI는 제대로 나옴
         //for (int i = 0; i < 5; i++)
