@@ -16,15 +16,15 @@ public class Managers : MonoBehaviour
     UIManager _ui = new UIManager();
     SceneManagerEx _scene = new SceneManagerEx();
     SoundManager _sound = new SoundManager();
-    //플레이어 인풋 매니저 할당
+    //플레이어 인풋 매니저
     public static InputManager Input { get { return Instance._input; } }
-    //리소스 매니저 할당
+    //리소스 매니저
     public static ResourceManager Resources { get { return Instance._resource; } }
-    //유아이 매니저 할당
+    //유아이 매니저
     public static UIManager UI { get { return Instance._ui; } }
-    //씬 매니저 할당
+    //씬 매니저
     public static SceneManagerEx Scene { get { return Instance._scene; } }
-    //사운드 매니저 할당
+    //사운드 매니저
     public static SoundManager Sound { get { return Instance._sound; } }
     void Start()
     {
