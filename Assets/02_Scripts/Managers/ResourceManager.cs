@@ -13,10 +13,15 @@ public class ResourceManager
 
     public GameObject Instantiate(string path, Transform parent = null)
     {
-        GameObject prefab = Load<GameObject>($"Prefabs/{path}");//경로만 지정해주면 범용적으로 사용가능함
+        //경로만 지정해주면 범용적으로 사용가능함
+        //Resources.Load<T>(path);를 사용할경우 최상위 폴더 명이 무조건 Resources여야함
+        //즉, 경로가 Resources 폴더 -> Prefabs 폴더 안에 있는 ObjectPrefab이란 뜻.
+        //세부화 할시 Prefabs는 생략 가능함. 이미 ResourceManager에서 정의해 줘서
+        GameObject prefab = Load<GameObject>($"Prefabs/{path}");
 
         if (prefab == null)
         {
+            //경로를 찾지 못했거나, Prefab을 못찾아서 생성시킨게 없으면 나오는 경고 문
             Debug.Log($"Failed to load prefab : {path}");
             return null;
         }
@@ -27,7 +32,6 @@ public class ResourceManager
         {
             go.name = go.name.Substring(0, index);
         }
-        //Object를 붙이지 않으면 재귀하려고 할거라서
         return go;
     }
 

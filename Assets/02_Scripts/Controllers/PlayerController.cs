@@ -39,7 +39,9 @@ public class PlayerController : MonoBehaviour
         //Managers.UI.ShowSceneUI<UI_Inven>();
         //프리팹 폴더를 만들어서 UI_Button을 생성시킨다.
         //Managers.Resources.Instantiate("UI/UI_Button");
+        //프리팹 폴더를 만들어서 UI_Inven을 생성 시킨다.
         //Managers.Resources.Instantiate("UI/UI_Inven");
+
     }
     public enum PlayerState
     {
