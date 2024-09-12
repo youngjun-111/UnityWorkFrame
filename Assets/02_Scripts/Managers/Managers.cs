@@ -62,6 +62,8 @@ public class Managers : MonoBehaviour
             s_instance = go.GetComponent<Managers>();
             //사운드오브젝트를 생성시켜주는것을 실행 시켜줌
             s_instance._sound.Init();
+            //오브젝트 풀링하는 함수를 실행
+            s_instance._pool.Init();
         }
     }
 
@@ -72,5 +74,8 @@ public class Managers : MonoBehaviour
         Input.Clear();
         Scene.Clear();
         UI.Clear();
+
+        //선택적클리어
+        Pool.Clear();
     }
 }

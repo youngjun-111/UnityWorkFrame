@@ -41,16 +41,22 @@ public class ResourceManager
         //즉, 경로가 Resources 폴더 -> Prefabs 폴더 안에 있는 ObjectPrefab이란 뜻.
         //세부화 할시 Prefabs는 생략 가능함. 이미 ResourceManager에서 정의해 줘서
         //1. 오리지널이 있으면 바로 사용 없으면 아래처럼 써야함
-        GameObject prefab = Load<GameObject>($"Prefabs/{path}");
+        //의미상 혼동이 생길 수 있어서 이름을 변경 시켜줌
+        //GameObject prefab = Load<GameObject>($"Prefabs/{path}");
+        GameObject original = Load<GameObject>($"Prefabs/{path}");
 
-        if (prefab == null)
+        if (original == null)
         {
             //경로를 찾지 못했거나, Prefab을 못찾아서 생성시킨게 없으면 나오는 경고 문
             Debug.Log($"Failed to load prefab : {path}");
             return null;
         }
         //2. 혹시 풀링된 오브젝트가 있으면 그것을 반환
-        GameObject go = Object.Instantiate(prefab, parent);
+        if(original.GetComponent<Poolable>() != null)
+        {
+            return Managers.Pool.Pop(original, parent).gameObject;
+        }
+        GameObject go = Object.Instantiate(original, parent);
         //"(Clone)"문자열을 찾아서 인덱스를 반환
         int index = go.name.IndexOf("(Clone)");
         if(index > 0)
@@ -66,6 +72,12 @@ public class ResourceManager
     {
         if (go == null)
             return;
+        Poolable poolable = go.GetComponent<Poolable>();
+        if(poolable != null)
+        {
+            Managers.Pool.Push(poolable);
+            return;
+        }
         Object.Destroy(go);
     }
 }
