@@ -131,4 +131,15 @@ public class PoolManager : MonoBehaviour
 
         _pool[name].Push(poolable);
     }
+
+    //Clear 씬이 변결될 때 애 써서 넣어놓은 것을 날려줘야 할지 아니면 그대로 유지되어야 할지 게임마다 다르지만
+    //(씬마다 사용하는 오브젝트가 너무다 다르다 싶으면 날려주는 기능이 있어야 하니)
+    public void Clear()
+    {
+        foreach (Transform child in _root)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+        _pool.Clear();
+    }
 }

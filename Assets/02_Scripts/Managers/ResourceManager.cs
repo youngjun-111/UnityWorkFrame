@@ -7,6 +7,29 @@ public class ResourceManager
     //랩핑
     public T Load<T>(string path) where T : Object
     {
+        //만약에 프리팹인 경우에 오리지널을 풀어서 한번에 찾아서
+        //그것을 바로 반환
+        //만약 타입이 게임오브젝라면
+        if(typeof(T) == typeof(GameObject))
+        {
+            //여기 로드에 Load<GameObject>($"Prefabs/{path}");이런식으로
+            //전체 경로를 넘겨주었는데 풀은 그냥 최종적인 이름을 사용하고 있으니
+            //((name)으로 되어 있으면 (name)만 사용해야 하니까
+            string name = path;
+            int index = name.LastIndexOf('/');
+            if(index >= 0)
+            {
+                name = name.Substring(index + 1);//이래야 ('/')다음 부터가 되겠지
+            }
+
+            //(name)을 찾아 봤는데 있으면 이것을 반환해 주면 되는데..
+            GameObject go = Managers.Pool.GetOriginal(name);
+            //그런데 없으면 예전 처럼 그냥 return Resources.Load<T>(path);로 되게
+            if(go != null)
+            {
+                return go as T;
+            }
+        }
         return Resources.Load<T>(path);
     }
 
