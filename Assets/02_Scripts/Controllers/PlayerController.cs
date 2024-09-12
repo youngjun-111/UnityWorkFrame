@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -114,7 +112,7 @@ public class PlayerController : MonoBehaviour
     {
         anim.SetFloat("speed", 0);
     }
-    
+
     #region 키보드 움직임
     void OnKeyboard()
     {
@@ -126,7 +124,7 @@ public class PlayerController : MonoBehaviour
             // == 보간
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward), 0.2f);
 
-             //방향을 정해줬으니 앞으로만 가게했는데..
+            //방향을 정해줬으니 앞으로만 가게했는데..
             //transform.Translate(Vector3.forward * Time.deltaTime * _speed);
 
             //트렌스레이트(로컬좌표)라서 포지션으로 바꿔줌
@@ -179,7 +177,7 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-#region 마우스 움직임
+    #region 마우스 움직임
     void OnMouseClicked(Define.MouseEvent evt)
     {
         //Press일경우는 작동 안되게끔(그냥 임시로 처리할 수 있게..)
@@ -187,8 +185,9 @@ public class PlayerController : MonoBehaviour
         //if (evt != Define.MouseEvent.Click)
         //    return;
         if (_state == PlayerState.Die)
+        {
             return;
-
+        }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Debug.DrawRay(Camera.main.transform.position, ray.direction * 100f, Color.red, 1f);

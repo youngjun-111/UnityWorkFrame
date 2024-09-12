@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -24,12 +22,18 @@ public abstract class UI_Base : MonoBehaviour
         for (int i = 0; i < names.Length; i++)
         {
             if (typeof(T) == typeof(GameObject))
+            {
                 objects[i] = Util.FindChild(gameObject, names[i], true);
+            }
             else
+            {
                 objects[i] = Util.FindChild<T>(gameObject, names[i], true);
+            }
 
             if (objects[i] == null)
+            {
                 Debug.Log($"Failed to bind({names[i]})");
+            }
         }
     }
 
@@ -39,7 +43,9 @@ public abstract class UI_Base : MonoBehaviour
 
         //값이 없으면 그냥 리턴
         if (_objects.TryGetValue(typeof(T), out objects) == false)
+        {
             return null;
+        }
 
         //오브젝츠 인덱스 번호를 추출한 다음에 T로 캐스팅 해줌
         return objects[idx] as T;
@@ -66,7 +72,7 @@ public abstract class UI_Base : MonoBehaviour
                 evt.OnClickHandler -= action;
                 evt.OnClickHandler += action;
                 break;
-             //타입이 드래그라면 클릭은 구독 취소
+            //타입이 드래그라면 클릭은 구독 취소
             case Define.UIEvent.Drag:
                 evt.OnDragHandler -= action;
                 evt.OnDragHandler += action;

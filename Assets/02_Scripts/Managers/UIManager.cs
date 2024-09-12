@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager 
+public class UIManager
 {
     int _order = 10;//혹시 모르니깐 여유를 두고 먼저 생성할게 있다면 10보다 작은 수로 팝업할 수 있게 함.
     //가장 마지막에 듸운 팝업이 가장 먼저 사라져야하기 때문에
@@ -16,7 +16,7 @@ public class UIManager
             GameObject root = GameObject.Find("@UI_Root");
             if (root == null)
             {
-                root = new GameObject {name="@UI_Root"};
+                root = new GameObject { name = "@UI_Root" };
             }
             return root;
         }
@@ -85,8 +85,10 @@ public class UIManager
     public void ClosePopupUI()
     {
         if (_popupStack.Count == 0)//Stack에 아무것도 없으면 그냥 리턴
+        {
             return;
-        
+        }
+
         UI_Popup popup = _popupStack.Pop();
         Managers.Resources.Destroy(popup.gameObject);
         popup = null;
@@ -95,7 +97,9 @@ public class UIManager
     public void ClosePopupUI(UI_Popup popup)//삭제할것을 지정할 수 있으니 좀더 안전하게 삭제할 수 있다.
     {
         if (_popupStack.Count == 0)
+        {
             return;
+        }
 
         //맨 위에서 개체를 제거하지 않고 반환 (꺼내지 않고 엿본다고 생각)
         if (_popupStack.Peek() != popup)
@@ -108,17 +112,24 @@ public class UIManager
     public void CloseAllPopupUI()
     {
         while (_popupStack.Count > 0)
+        {
             ClosePopupUI();
+        }
     }
 
     public T MakeSubItem<T>(Transform parent = null, string name = null) where T : UI_Base
     {
         if (string.IsNullOrEmpty(name))
+        {
             name = typeof(T).Name;
+        }
 
         GameObject go = Managers.Resources.Instantiate($"UI/SubItem/{name}");
         if (parent != null)
+        {
             go.transform.SetParent(parent);
+        }
+
         return Util.GetOrAddComponent<T>(go);
     }
 

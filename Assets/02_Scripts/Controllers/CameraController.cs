@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -17,15 +15,16 @@ public class CameraController : MonoBehaviour
     //업데이트보다 늦게 시작
     private void LateUpdate()
     {
-        if(_mode == Define.CameraMode.QuarterView)
+        if (_mode == Define.CameraMode.QuarterView)
         {
             RaycastHit hit;
             //플레이어에서 카메라 방향으로 레이를 발사(플레이어위치, 카메라위치, out hit,방향, 충돌 가능한 레이어)
-            if(Physics.Raycast(_player.transform.position, _delta, out hit, _delta.magnitude, LayerMask.GetMask("Wall")))
+            if (Physics.Raycast(_player.transform.position, _delta, out hit, _delta.magnitude, LayerMask.GetMask("Wall")))
             {
                 float dist = (hit.point - _player.transform.position).magnitude * 0.8f;//거리를 0.8를 곱해서 줄여줌
                 transform.position = _player.transform.position + _delta.normalized * dist;//카메라의 위치 변경
-            }else
+            }
+            else
             {
                 transform.position = _player.transform.position + _delta;
                 transform.LookAt(_player.transform);

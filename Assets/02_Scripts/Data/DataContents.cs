@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 #region Stat
 //메모리에서 들고 있는 거를 파일로 변환 할 수 있는 공식
@@ -22,7 +20,10 @@ public class StatData : ILoader<int, Stat>
     {
         Dictionary<int, Stat> dict = new Dictionary<int, Stat>();
         foreach (Stat stat in stats)
+        {
             dict.Add(stat.level, stat);
+        }
+
         return dict;
     }
 }
