@@ -16,6 +16,7 @@ public class Managers : MonoBehaviour
     UIManager _ui = new UIManager();
     SceneManagerEx _scene = new SceneManagerEx();
     SoundManager _sound = new SoundManager();
+    PoolManager _pool = new PoolManager();
     //플레이어 인풋 매니저
     public static InputManager Input { get { return Instance._input; } }
     //리소스 매니저
@@ -26,6 +27,9 @@ public class Managers : MonoBehaviour
     public static SceneManagerEx Scene { get { return Instance._scene; } }
     //사운드 매니저
     public static SoundManager Sound { get { return Instance._sound; } }
+    //풀 매니저
+    public static PoolManager Pool { get { return Instance._pool; } }
+
     void Start()
     {
         Init();
