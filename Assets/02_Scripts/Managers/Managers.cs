@@ -17,6 +17,7 @@ public class Managers : MonoBehaviour
     SceneManagerEx _scene = new SceneManagerEx();
     SoundManager _sound = new SoundManager();
     PoolManager _pool = new PoolManager();
+    DataManager _data = new DataManager();
     //플레이어 인풋 매니저
     public static InputManager Input { get { return Instance._input; } }
     //리소스 매니저
@@ -29,7 +30,8 @@ public class Managers : MonoBehaviour
     public static SoundManager Sound { get { return Instance._sound; } }
     //풀 매니저
     public static PoolManager Pool { get { return Instance._pool; } }
-
+    //데이타 매니저
+    public static DataManager Data { get { return Instance._data; } }
     void Start()
     {
         Init();
@@ -64,6 +66,8 @@ public class Managers : MonoBehaviour
             s_instance._sound.Init();
             //오브젝트 풀링하는 함수를 실행
             s_instance._pool.Init();
+            //용량이 엄청 크다고 볼수 없고 거의 항상 갖고있을 테니 삭제는 안시켜줌
+            s_instance._data.Init();
         }
     }
 

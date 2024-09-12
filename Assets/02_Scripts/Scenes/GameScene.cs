@@ -14,7 +14,11 @@ public class GameScene : BaseScene
     {
         base.Init();
         SceneType = Define.Scene.Game;
-
+        //Temp_유니티쨩 2개 생성
+        //for (int i = 0; i < 2; i++)
+        //{
+        //    Managers.Resources.Instantiate("unitychan");
+        //}
     }
 
     public override void Clear()

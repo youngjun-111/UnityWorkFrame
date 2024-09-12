@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolManager : MonoBehaviour
+public class PoolManager
 {
     #region Pool
     class Pool
@@ -51,7 +51,7 @@ public class PoolManager : MonoBehaviour
         }
 
         //풀에 넣은걸 뽑아오는 함수
-        public Poolable Pop(Transform parent = null)
+        public Poolable Pop(Transform parent)
         {
             Poolable poolable;
 
@@ -67,6 +67,11 @@ public class PoolManager : MonoBehaviour
             }
             //활성화 시켜주고
             poolable.gameObject.SetActive(true);
+            //돈디스트로이온로드에서 빼주고 현재 씬에서 생성 시켜주는 방법
+            if(parent == null)
+            {
+                poolable.transform.parent = Managers.Scene.CurrentScene.transform;
+            }
             //부모를 아까 지정해준 @Pool_Root의 자식으로 생성
             poolable.transform.parent = parent;
             //지정해준 풀링이 됐는지 안됐는지 확인
@@ -76,6 +81,7 @@ public class PoolManager : MonoBehaviour
     }
     #endregion
 
+    #region Pool을 Dictionary로 사용
     //각각 풀들은 스트링이라는 키를 이용해 이름(string)을 이용해서 관리
     Dictionary<string, Pool> _pool = new Dictionary<string, Pool>();
     Transform _root;
@@ -110,6 +116,8 @@ public class PoolManager : MonoBehaviour
 
     public GameObject GetOriginal(string name)
     {
+        //사실 1개만 생성 하고, 생성했던 그 1개를 복사해서 더욱 최적화 시키는?
+        //근데 외부적으로 보이는건 별반 차이가 없음
         if(_pool.ContainsKey(name) == false)
         return null;
         return _pool[name].Original;
@@ -118,6 +126,8 @@ public class PoolManager : MonoBehaviour
     //생성 Pop()을 한번도 안하고 풀이 없는 상태에서 Push를 하는 상태
     //에디터에서 드래그엔 드롭으로 뭔가 생성 했을 경우를 대비해서
     //예외적으로 처리할 사항
+    //정상적인 루트로 생성된 애는 비활성화 시키는데. 비정상적으로 생성된 애가 생성되고 poolable도 있기도하고
+    //그런데 오브젝트풀링으로 사전에 생성 시켜준 애가 아니면 그애는 poolable이 있어도 삭제 시켜버려줘
     public void Push(Poolable poolable)
     {
         string name = poolable.gameObject.name;
@@ -142,4 +152,5 @@ public class PoolManager : MonoBehaviour
         }
         _pool.Clear();
     }
+    #endregion
 }
