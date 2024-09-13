@@ -16,7 +16,7 @@ public abstract class BaseScene : MonoBehaviour
         Object obj = GameObject.FindObjectOfType(typeof(EventSystem));
         //찾을 오브젝트가 없으면 
         //경로 Resoureces -> Prefabs -> UI -> EventSystem 을 생성시키고 이름을 @EventSystem으로 설정
-        if(obj == null)
+        if (obj == null)
         {
             Managers.Resources.Instantiate("UI/EventSystem").name = "@EventSystem";
         }

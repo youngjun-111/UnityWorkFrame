@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ResourceManager
@@ -22,7 +20,7 @@ public class ResourceManager
             //((name)으로 되어 있으면 (name)만 사용해야 하니까
             string name = path;
             int index = name.LastIndexOf('/');
-            if(index >= 0)
+            if (index >= 0)
             {
                 name = name.Substring(index + 1);//이래야 ('/')다음 부터가 되겠지
             }
@@ -30,7 +28,9 @@ public class ResourceManager
             //그런데 없으면 예전 처럼 그냥 return Resources.Load<T>(path);로 되게
             //(name)을 찾아 봤는데 있으면 이것을 반환해 주면 되는데..
             if (go != null)
+            {
                 return go as T;
+            }
         }
         return Resources.Load<T>(path);
     }
@@ -61,7 +61,7 @@ public class ResourceManager
         GameObject go = Object.Instantiate(original, parent);
         //"(Clone)"문자열을 찾아서 인덱스를 반환
         int index = go.name.IndexOf("(Clone)");
-        if(index > 0)
+        if (index > 0)
         {
             go.name = go.name.Substring(0, index);
         }
@@ -76,9 +76,12 @@ public class ResourceManager
     public void Destroy(GameObject go)
     {
         if (go == null)
+        {
             return;
+        }
+
         Poolable poolable = go.GetComponent<Poolable>();
-        if(poolable != null)
+        if (poolable != null)
         {
             Managers.Pool.Push(poolable);
             return;

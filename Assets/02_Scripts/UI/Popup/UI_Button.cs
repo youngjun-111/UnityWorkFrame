@@ -1,9 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class UI_Button : UI_Popup
 {
@@ -34,7 +34,7 @@ public class UI_Button : UI_Popup
 
     void Start()
     {
-       Init();
+        Init();
     }
 
     public override void Init()

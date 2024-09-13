@@ -38,7 +38,9 @@ public class PoolManager
         public void Push(Poolable poolable)
         {
             if (poolable == null)
+            {
                 return;
+            }
             //부모를 아까 지정해준 @Pool_Root의 자식으로 생성
             poolable.transform.parent = Root;
             //StackPush로 1개씩 꺼줌
@@ -68,7 +70,7 @@ public class PoolManager
             //활성화 시켜주고
             poolable.gameObject.SetActive(true);
             //돈디스트로이온로드에서 빼주고 현재 씬에서 생성 시켜주는 방법
-            if(parent == null)
+            if (parent == null)
             {
                 poolable.transform.parent = Managers.Scene.CurrentScene.transform;
             }
@@ -118,8 +120,11 @@ public class PoolManager
     {
         //사실 1개만 생성 하고, 생성했던 그 1개를 복사해서 더욱 최적화 시키는?
         //근데 외부적으로 보이는건 별반 차이가 없음
-        if(_pool.ContainsKey(name) == false)
-        return null;
+        if (_pool.ContainsKey(name) == false)
+        {
+            return null;
+        }
+
         return _pool[name].Original;
     }
 
@@ -132,7 +137,7 @@ public class PoolManager
     {
         string name = poolable.gameObject.name;
 
-        if(_pool.ContainsKey(name) == false)
+        if (_pool.ContainsKey(name) == false)
         {
             //풀에 넣지 않고 삭제...
             GameObject.Destroy(poolable.gameObject);

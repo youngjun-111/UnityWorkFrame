@@ -1,16 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using TMPro;
 
 public class Util
 {
     public static GameObject FindChild(GameObject go, string name = null, bool recursive = false)
     {
-                            // T FindChild<T>
+        // T FindChild<T>
         Transform transform = FindChild<Transform>(go, name, recursive);
         if (transform == null)
         {
@@ -26,7 +26,9 @@ public class Util
     {
         //최상위 객체가 null일 경우
         if (go == null)
+        {
             return null;
+        }
 
         if (recursive == false) // 직속 자식만
         {
@@ -40,8 +42,10 @@ public class Util
                     T component = transform.GetComponent<T>();
                     //그 컴포넌트값이 널이 아니면
                     if (component != null)
+                    {
                         //그 컴포넌트를 반환해줘
                         return component;
+                    }
                 }
             }
         }
@@ -51,7 +55,7 @@ public class Util
             {   // 이름이 비어있거나 내가 찾으려는 이름과 같다면
                 if (string.IsNullOrEmpty(name) || component.name == name)
                 {
-                    return component; 
+                    return component;
                 }
             }
         }
@@ -65,7 +69,10 @@ public class Util
     {
         T component = go.GetComponent<T>();
         if (component == null)
+        {
             component = go.AddComponent<T>();
+        }
+
         return component;
     }
 }

@@ -50,7 +50,7 @@ public class SoundManager
             return;
         }
     }
-    
+
     //public void Play(string path, Define.Sound type = Define.Sound.Effect, float pitch = 1.0f)
     //{
     //    //함수를 여러가지 버전으로 분리 할 때는 반복된 코드는 하나의 버전에서 다른 버전을 호출 하도록
@@ -133,7 +133,7 @@ public class SoundManager
                 _audioClip.Add(path, audioClip);
             }
         }
-       if(audioClip == null)
+        if (audioClip == null)
         {
             Debug.Log($"AudioClip Missing {path}");
         }
